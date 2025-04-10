@@ -1,6 +1,5 @@
 const db = require('./db');
 
-// Controlador de login
 exports.login = (req, res) => {
   const { email, senha } = req.body;
 
@@ -17,7 +16,6 @@ exports.login = (req, res) => {
   });
 };
 
-// Controlador para cadastrar funcionários
 exports.registerFuncionario = (req, res) => {
   const { nome, email, senha, role } = req.body;
 
