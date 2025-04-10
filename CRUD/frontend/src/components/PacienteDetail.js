@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 const PacienteDetail = () => {
-  const { id } = useParams(); // Obtém o ID da URL
+  const { id } = useParams();
   const [paciente, setPaciente] = useState(null);
 
-  // Carregar os detalhes do paciente
   useEffect(() => {
     fetch(`http://localhost:3001/api/pacientes/${id}`)
       .then((res) => {

@@ -18,8 +18,8 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('user', JSON.stringify(data)); // Armazena os dados do usuário no localStorage
-        navigate('/'); // Redireciona para a página inicial
+        localStorage.setItem('user', JSON.stringify(data));
+        navigate('/');
       } else {
         const errorData = await response.json();
         alert(errorData.error || 'Erro ao fazer login');

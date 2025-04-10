@@ -1,6 +1,5 @@
 const db = require('./db');
 
-// Obter todos os pacientes
 exports.getAll = (req, res) => {
   db.query('SELECT * FROM pacientes', (err, results) => {
     if (err) {
@@ -11,7 +10,6 @@ exports.getAll = (req, res) => {
   });
 };
 
-// Obter paciente por ID
 exports.getById = (req, res) => {
   const { id } = req.params;
 
@@ -27,7 +25,6 @@ exports.getById = (req, res) => {
   });
 };
 
-// Criar um novo paciente
 exports.create = (req, res) => {
   const { nome, data_internacao, data_alta, diagnostico, status, observacoes } = req.body;
 
@@ -48,7 +45,6 @@ exports.create = (req, res) => {
   );
 };
 
-// Atualizar um paciente existente
 exports.update = (req, res) => {
   const { nome, data_internacao, data_alta, diagnostico, status, observacoes } = req.body;
 
@@ -72,7 +68,6 @@ exports.update = (req, res) => {
   );
 };
 
-// Excluir um paciente
 exports.delete = (req, res) => {
   db.query('DELETE FROM pacientes WHERE id = ?', [req.params.id], (err, result) => {
     if (err) {

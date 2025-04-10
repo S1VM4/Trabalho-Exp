@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const FuncionarioForm = () => {
-  const { id } = useParams(); // Obtém o ID da URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  // Carregar os dados do funcionário para edição
   useEffect(() => {
     if (id) {
       fetch(`http://localhost:3001/api/funcionarios/${id}`)
@@ -19,9 +18,9 @@ const FuncionarioForm = () => {
           return res.json();
         })
         .then((data) => {
-          setNome(data.nome || ''); // Garante que o valor seja uma string
+          setNome(data.nome || '');
           setEmail(data.email || '');
-          setSenha(''); // Não carregue a senha por segurança
+          setSenha('');
         })
         .catch((err) => console.error('Erro ao carregar funcionário:', err));
     }
@@ -31,7 +30,7 @@ const FuncionarioForm = () => {
     e.preventDefault();
 
     try {
-      const method = id ? 'PUT' : 'POST'; // Define o método HTTP com base no modo
+      const method = id ? 'PUT' : 'POST';
       const url = id
         ? `http://localhost:3001/api/funcionarios/${id}`
         : 'http://localhost:3001/api/funcionarios';
@@ -40,14 +39,14 @@ const FuncionarioForm = () => {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'x-user-role': 'funcionario', // Envie o papel do usuário no cabeçalho
+          'x-user-role': 'funcionario',
         },
         body: JSON.stringify({ nome, email, senha }),
       });
 
       if (response.ok) {
         alert(id ? 'Funcionário atualizado com sucesso!' : 'Funcionário cadastrado com sucesso!');
-        navigate('/funcionarios'); // Redireciona para a listagem de funcionários
+        navigate('/funcionarios');
       } else {
         const data = await response.json();
         alert(data.error || 'Erro ao salvar funcionário');
@@ -84,7 +83,7 @@ const FuncionarioForm = () => {
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
           className="input"
-          required={!id} // Senha obrigatória apenas no modo de criação
+          required={!id}
         />
         <div className="button-group">
           <button type="submit" className="button">

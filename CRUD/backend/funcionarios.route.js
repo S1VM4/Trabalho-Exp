@@ -3,7 +3,6 @@ const router = express.Router();
 const db = require('./db');
 const { authorize } = require('./auth.middleware');
 
-// Rota para listar todos os funcionários
 router.get('/funcionarios', authorize('funcionario'), (req, res) => {
   db.query('SELECT id, nome, email FROM usuarios WHERE role = "funcionario"', (err, results) => {
     if (err) {
@@ -14,7 +13,6 @@ router.get('/funcionarios', authorize('funcionario'), (req, res) => {
   });
 });
 
-// Rota para adicionar um funcionário
 router.post('/funcionarios', authorize('funcionario'), (req, res) => {
   const { nome, email, senha } = req.body;
 
@@ -32,7 +30,6 @@ router.post('/funcionarios', authorize('funcionario'), (req, res) => {
   );
 });
 
-// Rota para editar um funcionário
 router.put('/funcionarios/:id', authorize('funcionario'), (req, res) => {
   const { id } = req.params;
   const { nome, email, senha } = req.body;
@@ -47,7 +44,6 @@ router.put('/funcionarios/:id', authorize('funcionario'), (req, res) => {
   );
 });
 
-// Rota para excluir um funcionário
 router.delete('/funcionarios/:id', authorize('funcionario'), (req, res) => {
   const { id } = req.params;
 

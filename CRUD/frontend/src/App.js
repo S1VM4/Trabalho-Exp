@@ -6,20 +6,18 @@ import PacienteForm from './components/PacienteForm';
 import Login from './components/Login';
 import FuncionariosList from './components/FuncionariosList';
 import FuncionarioForm from './components/FuncionarioForm';
-import PacienteDetail from './components/PacienteDetail'; // Certifique-se de importar o componente
+import PacienteDetail from './components/PacienteDetail';
 
 
 function App() {
-  const user = JSON.parse(localStorage.getItem('user')); // Recupera o usuário logado
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        {/* Rota de Login */}
         <Route path="/login" element={<Login />} />
 
-        {/* Rotas acessíveis por funcionários */}
         {user?.role === 'funcionario' ? (
           <>
             <Route path="/" element={<PacientesList />} />
@@ -31,7 +29,6 @@ function App() {
             <Route path="/detalhes/:id" element={<PacienteDetail />} />
           </>
         ) : (
-          // Redireciona para login se não autenticado
           <Route path="*" element={<Navigate to="/login" />} />
         )}
       </Routes>

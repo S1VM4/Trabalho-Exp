@@ -5,11 +5,11 @@ const FuncionariosList = () => {
   const [funcionarios, setFuncionarios] = useState([]);
   const navigate = useNavigate();
 
-  // Carregar a lista de funcionários ao montar o componente
+
   useEffect(() => {
     fetch('http://localhost:3001/api/funcionarios', {
       headers: {
-        'x-user-role': 'funcionario', // Envie o papel do usuário no cabeçalho
+        'x-user-role': 'funcionario',
       },
     })
       .then((res) => {
@@ -22,7 +22,6 @@ const FuncionariosList = () => {
       .catch((err) => console.error('Erro ao buscar funcionários:', err));
   }, []);
 
-  // Função para excluir um funcionário
   const handleDelete = async (id) => {
     if (window.confirm('Tem certeza que deseja excluir este funcionário?')) {
       try {
